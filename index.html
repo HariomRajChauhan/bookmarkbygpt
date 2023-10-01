@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Bookmark Manager</h1>
+    </header>
+
+    <main>
+        <form id="bookmarkForm">
+            <label for="siteName">Site Name:</label>
+            <input type="text" id="siteName" required>
+            <br>
+            <label for="siteURL">Site URL:</label>
+            <input type="text" id="siteURL" required>
+            <button type="button" onclick="addBookmark()">Add Bookmark</button>
+        </form>
+
+        <h2>Your Bookmarks</h2>
+        <ul id="bookmarkList"></ul>
+    </main>
+
+    <script>
+        function addBookmark() {
+            const siteNameInput = document.getElementById('siteName');
+            const siteURLInput = document.getElementById('siteURL');
+            const bookmarkList = document.getElementById('bookmarkList');
+
+            const siteName = siteNameInput.value;
+            const siteURL = siteURLInput.value;
+
+            if (!siteName || !siteURL) {
+                alert('Please enter both site name and URL.');
+                return;
+            }
+
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = siteURL;
+            link.textContent = siteName;
+            link.target = '_blank';
+
+            listItem.appendChild(link);
+            bookmarkList.appendChild(listItem);
+
+            siteNameInput.value = '';
+            siteURLInput.value = '';
+        }
+    </script>
+
+</body>
+</html>
